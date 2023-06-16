@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_color">#164871</color>
+    <color name="btn_color">#eeb42e</color>
+    <color name="_226daa">#226daa</color>
+
+
+    <color name="_21BE6916">#21BE6916</color>
+    <color name="_000000">#FF000000</color>
+    <color name="_ffffff">#FFFFFFFF</color>
+
+
+    <color name="_7ed2f2">#7ed2f2</color>
+    <color name="_164871">#164871</color>
+    <color name="_c72e1a">#c72e1a</color>
+    <color name="white">#FFFFFF</color>
+    <color name="_353535">#353535</color>
+
+
+</resources>
