@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
@@ -169,21 +170,10 @@ fun Context.checkCallPermissions(vararg permission: String, returnData: (Boolean
 
 
 
-
-
-fun Activity.checkIsTablet(): Boolean {
-    val display = (this).windowManager.defaultDisplay
-    val metrics = DisplayMetrics()
-    display.getMetrics(metrics)
-    val widthInches = metrics.widthPixels / metrics.xdpi
-    val heightInches = metrics.heightPixels / metrics.ydpi
-    val diagonalInches = Math.sqrt(
-        Math.pow(widthInches.toDouble(), 2.0) + Math.pow(
-            heightInches.toDouble(),
-            2.0
-        )
-    )
-    return diagonalInches >= 7.0
+fun Context.isTablet(): Boolean {
+    return this.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_LARGE
 }
+
+
 
 

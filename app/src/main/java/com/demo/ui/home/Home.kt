@@ -1,5 +1,8 @@
 package com.demo.ui.home
 
+import android.bluetooth.BluetoothClass.Device
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,9 +15,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.demo.databinding.HomeBinding
 import com.demo.model.ItemPhoto
-import com.demo.model.Items
+import com.demo.utils.isTablet
 import dagger.hilt.android.AndroidEntryPoint
-import com.demo.utils.checkIsTablet
+
 
 @AndroidEntryPoint
 class Home : Fragment() {
@@ -45,17 +48,15 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         viewModel.getPhotos() {
             var photoItems = this
             if (this != null) {
-                if (requireActivity().checkIsTablet()) {
+                if (requireActivity().isTablet()) {
                     binding.rcPhotosList.setLayoutManager(GridLayoutManager(requireContext(), 7))
                 } else {
                     binding.rcPhotosList.setLayoutManager(GridLayoutManager(requireContext(), 3))
                 }
                 binding.rcPhotosList.adapter = viewModel.photosAdapter
-
 
                 if(isWatcher == false){
                     viewModel.photosAdapter.submitList(photoItems)
@@ -64,15 +65,12 @@ class Home : Fragment() {
 
                 binding.editTextSearch.addTextChangedListener(object : TextWatcher {
                     override fun afterTextChanged(s: Editable?) {
-                        Log.e("TAG", "afterTextChanged")
                     }
 
                     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                        Log.e("TAG", "beforeTextChanged")
                     }
 
                     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        Log.e("TAG", "onTextChanged")
                         isWatcher = true
                         if(s.toString().isEmpty()){
                             viewModel.photosAdapter.submitList(photoItems)
@@ -97,11 +95,11 @@ class Home : Fragment() {
     }
 
 
-
-
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
     }
+
+
 
 }
